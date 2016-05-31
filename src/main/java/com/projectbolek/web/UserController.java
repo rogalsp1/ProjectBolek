@@ -30,13 +30,14 @@ public class UserController implements Serializable{
         this.userService = userService;
     }
 
-    @RequestMapping(path = "/userlist",method = RequestMethod.GET)
+    @RequestMapping(path = "/list",method = RequestMethod.GET)
     public List<User> getAllUsers(){
         return userService.findAll();
     }
 
-    @RequestMapping(path = "/newUser", method = RequestMethod.POST)
-    ResponseEntity<?> addNewUser(@RequestBody User input) {
+    @RequestMapping(path = "/new", method = RequestMethod.POST)
+    public ResponseEntity<?> addNewUser(@RequestBody User input) {
+        //TODO jeszcze do roboty
         userService.save(input);
         HttpHeaders httpHeaders = new HttpHeaders();
         return new ResponseEntity<>(null,httpHeaders, HttpStatus.CREATED);
