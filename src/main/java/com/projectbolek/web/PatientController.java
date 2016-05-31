@@ -4,6 +4,7 @@ import com.projectbolek.domain.model.ContactDetails;
 import com.projectbolek.domain.model.Patient;
 import com.projectbolek.domain.model.User;
 import com.projectbolek.service.PatientService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(path = "/patients/")
+@Slf4j
 public class PatientController implements Serializable{
 
     private static final long serialVersionUID = -3606314241856173634L;
@@ -42,7 +44,7 @@ public class PatientController implements Serializable{
 
     @RequestMapping(path = "/deativate", method = RequestMethod.POST)
     public ResponseEntity<?> deactivatePatient(@RequestParam("id") Long patientId){
-        //TODO
+        patientService.deactivatePatient(patientId);
         return new ResponseEntity<Object>(null,HttpStatus.OK);
     }
 

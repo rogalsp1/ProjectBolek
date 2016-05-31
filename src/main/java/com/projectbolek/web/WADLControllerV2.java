@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.namespace.QName;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jvnet.ws.wadl.Application;
 import org.jvnet.ws.wadl.Doc;
 import org.jvnet.ws.wadl.Param;
@@ -37,6 +38,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 @Controller
 @RequestMapping("/v2/application.wadl")
+@Slf4j
 public class WADLControllerV2 {
     String xs_namespace="http://www.w3.org/2001/XMLSchema" ;
     @Autowired

@@ -15,4 +15,7 @@ public interface PatientRepository extends CrudRepository<Patient, Long>{
 
     @Query(value = "select p from Patient p where p.active = true ")
     List<Patient> findActivePatients();
+
+    @Query(value = "update Patient p set p.active = false where p.id = ?1")
+    void deactivatePatient(Long id);
 }
