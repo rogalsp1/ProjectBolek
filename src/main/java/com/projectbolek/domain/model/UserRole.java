@@ -1,5 +1,6 @@
 package com.projectbolek.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,8 +20,10 @@ public class UserRole implements Serializable{
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_roles_id_seq")
     private Long id;
 
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private EnumUserRole role;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

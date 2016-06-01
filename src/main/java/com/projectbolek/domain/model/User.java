@@ -47,5 +47,9 @@ public class User implements Serializable{
     @OneToMany(mappedBy = "personel")
     private List<PersonelInaccessibility> inaccessibility;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<UserRole> roles;
+
 
 }
