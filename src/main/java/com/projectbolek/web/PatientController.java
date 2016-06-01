@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by rogalsp1 on 30.05.16.
@@ -50,13 +51,18 @@ public class PatientController implements Serializable{
 
     @RequestMapping(path = "/contactdetails", method = RequestMethod.GET)
     public ContactDetails getContactDetails(@RequestParam("id") Long patientId){
-        //TODO
-        return null;
+        return patientService.findContactDetailsByPatientId(patientId);
     }
 
     @RequestMapping(path = "/update", method = RequestMethod.POST)
     public ResponseEntity<?> updatePatient(@RequestBody Patient patient){
         //TODO
         return new ResponseEntity<Object>(null, HttpStatus.OK);
+    }
+
+    @RequestMapping(path= "/updateContact", method = RequestMethod.POST)
+    public ResponseEntity<?> updatePatientContactDetails(@RequestBody ContactDetails contactDetails){
+        //TODO
+        return  new ResponseEntity<Object>(null, HttpStatus.OK);
     }
 }

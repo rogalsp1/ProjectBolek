@@ -1,13 +1,13 @@
 package com.projectbolek.service;
 
+import com.projectbolek.domain.model.ContactDetails;
 import com.projectbolek.domain.model.Patient;
+import com.projectbolek.domain.repository.ContactDetailsRepository;
 import com.projectbolek.domain.repository.PatientRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Serializable;
 import java.util.List;
@@ -22,10 +22,12 @@ public class PatientService implements Serializable{
     private static final long serialVersionUID = -9032789337174910969L;
 
     private PatientRepository patientRepository;
+    private ContactDetailsRepository contactDetailsRepository;
 
     @Autowired
-    public PatientService(PatientRepository patientRepository) {
+    public PatientService(PatientRepository patientRepository, ContactDetailsRepository contactDetailsRepository) {
         this.patientRepository = patientRepository;
+        this.contactDetailsRepository = contactDetailsRepository;
     }
 
     public List<Patient> findActivePatients(){
@@ -36,6 +38,10 @@ public class PatientService implements Serializable{
     public void deactivatePatient(Long id){
         patientRepository.deactivatePatient(id);
         log.info("deactivating patient ["+id+"]");
+    }
+
+    public ContactDetails findContactDetailsByPatientId(Long id){
+        return contactDetailsRepository.findContacDetailstByPatientId(id);
     }
 
 }
