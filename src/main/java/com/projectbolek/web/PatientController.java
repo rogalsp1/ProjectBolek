@@ -2,6 +2,7 @@ package com.projectbolek.web;
 
 import com.projectbolek.domain.model.ContactDetails;
 import com.projectbolek.domain.model.Patient;
+import com.projectbolek.domain.model.exception.ApplicationException;
 import com.projectbolek.service.PatientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +37,15 @@ public class PatientController implements Serializable{
 
     @RequestMapping(path = "/new", method = RequestMethod.POST)
     public ResponseEntity<?> addNewPatient(@RequestBody Patient patient){
-        //TODO
+        try {
+            patientService.addNewPatient(patient);
+        } catch (ApplicationException e) {
+            return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return new ResponseEntity<Object>(null, HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/deativate", method = RequestMethod.POST)
+    @RequestMapping(path = "/deactivate", method = RequestMethod.POST)
     public ResponseEntity<?> deactivatePatient(@RequestParam("id") Long patientId){
         patientService.deactivatePatient(patientId);
         return new ResponseEntity<Object>(null,HttpStatus.OK);
@@ -53,13 +58,13 @@ public class PatientController implements Serializable{
 
     @RequestMapping(path = "/update", method = RequestMethod.POST)
     public ResponseEntity<?> updatePatient(@RequestBody Patient patient){
-        //TODO
+        patientService.save(patient);
         return new ResponseEntity<Object>(null, HttpStatus.OK);
     }
 
-    @RequestMapping(path= "/updateContact", method = RequestMethod.POST)
-    public ResponseEntity<?> updatePatientContactDetails(@RequestBody ContactDetails contactDetails){
-        //TODO
-        return  new ResponseEntity<Object>(null, HttpStatus.OK);
+    @RequestMapping(path= "/saveContact", method = RequestMethod.POST)
+    public ResponseEntity<?> saveContactDetails(@RequestBody ContactDetails contactDetails, @RequestParam("patient_id") Long id){
+        patientService.saveContactDetails(contactDetails,id);
+        return new ResponseEntity<Object>(null, HttpStatus.OK);
     }
 }

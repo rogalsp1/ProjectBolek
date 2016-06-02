@@ -1,6 +1,7 @@
 package com.projectbolek.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.projectbolek.domain.model.enums.UserRoleEnum;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,7 +22,7 @@ public class UserRole implements Serializable{
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private EnumUserRole role;
+    private UserRoleEnum role;
 
     @JsonIgnore
     @ManyToOne

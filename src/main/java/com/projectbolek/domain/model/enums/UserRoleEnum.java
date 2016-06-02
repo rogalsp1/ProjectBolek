@@ -1,9 +1,9 @@
-package com.projectbolek.domain.model;
+package com.projectbolek.domain.model.enums;
 
 /**
  * Created by rogalsp1 on 01.06.16.
  */
-public enum EnumUserRole {
+public enum UserRoleEnum {
     ADMIN,
     DOCTOR,
     RECEPTIONIST

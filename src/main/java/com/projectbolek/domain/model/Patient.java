@@ -1,6 +1,7 @@
 package com.projectbolek.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.projectbolek.domain.model.enums.SexEnum;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,7 +19,7 @@ public class Patient implements Serializable{
 
     private static final long serialVersionUID = -4132255923600636185L;
 
-    @Id @SequenceGenerator(name = "patient_id_seq", sequenceName = "patient_id_seq")
+    @Id @SequenceGenerator(name = "patient_id_seq", sequenceName = "bolekshema.patient_id_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "patient_id_seq")
     private Long id;
 
@@ -27,6 +28,9 @@ public class Patient implements Serializable{
 
     @Column(name = "last_name")
     private String lastName;
+
+    @Enumerated(EnumType.STRING)
+    private SexEnum sex;
 
     @JsonIgnore
     private Boolean active;

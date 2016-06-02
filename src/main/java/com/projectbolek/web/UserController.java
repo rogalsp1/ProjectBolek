@@ -39,7 +39,6 @@ public class UserController implements Serializable{
 
     @RequestMapping(path = "/new", method = RequestMethod.POST)
     public ResponseEntity<?> addNewUser(@RequestBody User input) {
-        //TODO jeszcze do roboty
         userService.save(input);
         HttpHeaders httpHeaders = new HttpHeaders();
         return new ResponseEntity<>(null,httpHeaders, HttpStatus.CREATED);

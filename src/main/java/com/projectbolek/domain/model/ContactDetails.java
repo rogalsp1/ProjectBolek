@@ -1,5 +1,6 @@
 package com.projectbolek.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 
@@ -17,8 +18,8 @@ public class ContactDetails implements Serializable {
 
     private static final long serialVersionUID = 5140439178383171952L;
 
-    @Id @SequenceGenerator(name = "contact_detils_id_seq", sequenceName = "contact_detils_id_seq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_detils_id_seq")
+    @Id @SequenceGenerator(name = "contact_details_id_seq", sequenceName = "bolekshema.contact_details_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_details_id_seq")
     private Long id;
 
     private String country;
@@ -32,6 +33,7 @@ public class ContactDetails implements Serializable {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
