@@ -1,10 +1,10 @@
 package com.projectbolek.web;
 
-import com.projectbolek.domain.model.User;
+import com.projectbolek.domain.entity.UserEntity;
+import com.projectbolek.domain.model.dto.UserDTO;
 import com.projectbolek.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,14 +33,15 @@ public class UserController implements Serializable{
     }
 
     @RequestMapping(path = "/list",method = RequestMethod.GET)
-    public List<User> getAllUsers(){
+    public List<UserEntity> getAllUsers(){
         return userService.findAll();
     }
 
     @RequestMapping(path = "/new", method = RequestMethod.POST)
-    public ResponseEntity<?> addNewUser(@RequestBody User input) {
-        userService.save(input);
+    public ResponseEntity<?> addNewUser(@RequestBody UserDTO user) {
+/*        userService.save(input);
+        log.info("New user created["+ input.getFirstName()+" "+input.getLastName()+"]");
         HttpHeaders httpHeaders = new HttpHeaders();
-        return new ResponseEntity<>(null,httpHeaders, HttpStatus.CREATED);
+      */  return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 }

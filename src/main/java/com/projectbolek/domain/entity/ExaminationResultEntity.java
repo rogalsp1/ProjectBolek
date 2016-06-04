@@ -1,4 +1,4 @@
-package com.projectbolek.domain.model;
+package com.projectbolek.domain.entity;
 
 import lombok.Data;
 
@@ -9,13 +9,13 @@ import java.io.Serializable;
  * Created by rogalsp1 on 29.05.16.
  */
 @Entity
-@Table(name = "examination_result")
+@Table(name = "examination_result", schema = "bolekshema")
 @Data
-public class ExaminationResult implements Serializable {
+public class ExaminationResultEntity extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1182064227024745058L;
 
-    @Id @SequenceGenerator(name = "examination_result_id_seq", sequenceName = "examination_result_id_seq")
+    @Id @SequenceGenerator(name = "examination_result_id_seq", sequenceName = "bolekshema.examination_result_id_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "examination_result_id_seq")
     private Long id;
 
@@ -26,7 +26,7 @@ public class ExaminationResult implements Serializable {
     private byte[] result;
 
     @ManyToOne
-    @JoinColumn(name = "visit_service_id")
-    private VisitService visitService;
+    @JoinColumn(name = "examination_id")
+    private ExaminationEntity examination;
 
 }

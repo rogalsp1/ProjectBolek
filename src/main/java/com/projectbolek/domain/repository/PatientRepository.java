@@ -1,6 +1,6 @@
 package com.projectbolek.domain.repository;
 
-import com.projectbolek.domain.model.Patient;
+import com.projectbolek.domain.entity.PatientEntity;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -13,14 +13,14 @@ import java.util.Optional;
  * Created by rogalsp1 on 30.05.16.
  */
 @Repository
-public interface PatientRepository extends CrudRepository<Patient, Long>{
+public interface PatientRepository extends CrudRepository<PatientEntity, Long>{
 
-    @Query(value = "select p from Patient p where p.active = true ")
-    List<Patient> findActivePatients();
+    @Query(value = "select p from PatientEntity p where p.active = true ")
+    List<PatientEntity> findActivePatients();
 
     @Modifying
-    @Query(value = "update Patient p set p.active = false where p.id = ?1")
+    @Query(value = "update PatientEntity p set p.active = false where p.id = ?1")
     void deactivatePatient(Long id);
 
-    Optional<Patient> findPatientByPesel(String pesel);
+    Optional<PatientEntity> findPatientByPesel(String pesel);
 }

@@ -1,6 +1,6 @@
 package com.projectbolek.service;
 
-import com.projectbolek.domain.model.User;
+import com.projectbolek.domain.entity.UserEntity;
 import com.projectbolek.domain.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 @Service
 @Slf4j
-public class UserService extends BaseService<User> implements Serializable{
+public class UserService extends BaseService<UserEntity> implements Serializable{
 
     private static final long serialVersionUID = -7047655185530312827L;
     private UserRepository userRepository;
@@ -25,7 +25,7 @@ public class UserService extends BaseService<User> implements Serializable{
     }
 
     @Override
-    public CrudRepository<User, Long> getRepository() {
+    public CrudRepository<UserEntity, Long> getRepository() {
         return userRepository;
     }
 }

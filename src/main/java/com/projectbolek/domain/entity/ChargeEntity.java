@@ -1,4 +1,4 @@
-package com.projectbolek.domain.model;
+package com.projectbolek.domain.entity;
 
 import lombok.Data;
 
@@ -12,12 +12,12 @@ import java.sql.Timestamp;
 @Entity
 @Table(schema = "bolekshema", name = "charge")
 @Data
-public class Charge implements Serializable{
+public class ChargeEntity extends BaseEntity implements Serializable{
 
     private static final long serialVersionUID = 4225411281569337626L;
 
     @Id
-    @SequenceGenerator(name = "charge_seq" ,sequenceName = "charge_id_seq")
+    @SequenceGenerator(name = "charge_seq" ,sequenceName = "bolekshema.charge_id_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "charge_seq")
     private Long id;
 
@@ -32,11 +32,11 @@ public class Charge implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
-    private Patient patient;
+    private PatientEntity patient;
 
     @OneToOne
     @JoinColumn(name = "visit_service_id")
-    private Charge charge;
+    private ExaminationEntity examination;
 
 
 }

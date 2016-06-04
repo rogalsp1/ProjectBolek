@@ -35,7 +35,7 @@ public class WADLControllerV2 {
     public @ResponseBody Application generateWadl(HttpServletRequest request) {
         Application result = new Application();
         Doc doc = new Doc();
-        doc.setTitle("Spring REST Service WADL");
+        doc.setTitle("Spring REST ServiceEntity WADL");
         result.getDoc().add(doc);
         Resources wadResources = new Resources();
         wadResources.setBase(getBaseUrl(request));

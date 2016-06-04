@@ -1,6 +1,5 @@
-package com.projectbolek.domain.model;
+package com.projectbolek.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projectbolek.domain.model.enums.SexEnum;
 import lombok.Data;
 
@@ -15,7 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "patient", schema = "bolekshema")
 @Data
-public class Patient implements Serializable{
+public class PatientEntity extends BaseEntity implements Serializable{
 
     private static final long serialVersionUID = -4132255923600636185L;
 
@@ -32,7 +31,6 @@ public class Patient implements Serializable{
     @Enumerated(EnumType.STRING)
     private SexEnum sex;
 
-    @JsonIgnore
     private Boolean active;
 
     private String pesel;
@@ -42,11 +40,9 @@ public class Patient implements Serializable{
     @Column(name = "registration_date")
     private Timestamp registrationDate;
 
-    @JsonIgnore
     @OneToOne(mappedBy = "patient")
-    private ContactDetails contactDetails;
+    private ContactDetailsEntity contactDetailsEntity;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "patient")
-    private List<Charge> charges;
+    private List<ChargeEntity> charges;
 }

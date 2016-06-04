@@ -1,4 +1,4 @@
-package com.projectbolek.domain.model;
+package com.projectbolek.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "system_user", schema = "bolekshema")
 @Data
-public class User implements Serializable{
+public class UserEntity extends BaseEntity implements Serializable{
 
     private static final long serialVersionUID = -4084090776711803189L;
 
@@ -41,15 +41,15 @@ public class User implements Serializable{
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    private List<Visit> visitList;
+    private List<VisitEntity> visitList;
 
     @JsonIgnore
     @OneToMany(mappedBy = "personel")
-    private List<PersonelInaccessibility> inaccessibility;
+    private List<PersonelInaccessibilityEntity> inaccessibility;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    private List<UserRole> roles;
+    private List<UserRoleEntity> roles;
 
 
 }

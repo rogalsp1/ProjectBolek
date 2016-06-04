@@ -1,7 +1,7 @@
 package com.projectbolek.service;
 
 import com.google.common.collect.Lists;
-import com.projectbolek.domain.model.Charge;
+import com.projectbolek.domain.entity.ChargeEntity;
 import com.projectbolek.domain.repository.ChargeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Service
 @Slf4j
-public class ChargeService extends BaseService<Charge> implements Serializable{
+public class ChargeService extends BaseService<ChargeEntity> implements Serializable{
 
     private static final long serialVersionUID = -3912845706287604053L;
 
@@ -28,11 +28,11 @@ public class ChargeService extends BaseService<Charge> implements Serializable{
     }
 
     @Override
-    public CrudRepository<Charge, Long> getRepository() {
+    public CrudRepository<ChargeEntity, Long> getRepository() {
         return chargeRepository;
     }
 
-    public List<Charge> findAll(){
+    public List<ChargeEntity> findAll(){
         return Lists.newArrayList(chargeRepository.findAll());
     }
 }

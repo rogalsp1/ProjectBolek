@@ -1,7 +1,7 @@
 package com.projectbolek.service;
 
-import com.projectbolek.domain.model.ContactDetails;
-import com.projectbolek.domain.model.Patient;
+import com.projectbolek.domain.entity.ContactDetailsEntity;
+import com.projectbolek.domain.entity.PatientEntity;
 import com.projectbolek.domain.model.exception.ApplicationException;
 import com.projectbolek.domain.repository.ContactDetailsRepository;
 import com.projectbolek.domain.repository.PatientRepository;
@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Service
 @Slf4j
-public class PatientService extends BaseService<Patient> implements Serializable{
+public class PatientService extends BaseService<PatientEntity> implements Serializable{
 
     private static final long serialVersionUID = -9032789337174910969L;
 
@@ -35,11 +35,11 @@ public class PatientService extends BaseService<Patient> implements Serializable
     }
 
     @Override
-    public CrudRepository<Patient, Long> getRepository() {
+    public CrudRepository<PatientEntity, Long> getRepository() {
         return patientRepository;
     }
 
-    public List<Patient> findActivePatients(){
+    public List<PatientEntity> findActivePatients(){
         return patientRepository.findActivePatients();
     }
 
@@ -49,17 +49,17 @@ public class PatientService extends BaseService<Patient> implements Serializable
         log.info("deactivating patient ["+id+"]");
     }
 
-    public ContactDetails findContactDetailsByPatientId(Long id){
-        return contactDetailsRepository.findContacDetailstByPatientId(id);
+    public ContactDetailsEntity findContactDetailsByPatientId(Long id){
+        return contactDetailsRepository.findContacDetailsEntityByPatientId(id);
     }
 
     @Transactional
-    public void addNewPatient(Patient patient) throws ApplicationException {
+    public void addNewPatient(PatientEntity patient) throws ApplicationException {
         if(isPeselUnique(patient.getPesel())){
             patient.setRegistrationDate(Timestamp.valueOf(LocalDateTime.now()));
             patient.setActive(true);
             patientRepository.save(patient);
-            log.info("new patient created");
+            log.info("new patient["+patient.getFirstName()+" "+patient.getLastName() +"] created");
         }
         else {
             log.debug("there is already patient with the same PESEL["+patient.getPesel()+"]");
@@ -68,13 +68,12 @@ public class PatientService extends BaseService<Patient> implements Serializable
     }
 
     @Transactional
-    public void saveContactDetails(ContactDetails contactDetails, Long patientId){
-        Patient patient = patientRepository.findOne(patientId);
-        contactDetails.setPatient(patient);
-        contactDetailsRepository.save(contactDetails);
+    public void saveContactDetails(ContactDetailsEntity contactDetailsEntity, Long patientId){
+        PatientEntity patient = patientRepository.findOne(patientId);
+        contactDetailsEntity.setPatient(patient);
+        contactDetailsRepository.save(contactDetailsEntity);
     }
     private boolean isPeselUnique(String pesel){
         return !patientRepository.findPatientByPesel(pesel).isPresent();
     }
-
 }

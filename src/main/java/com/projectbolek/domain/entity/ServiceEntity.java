@@ -1,4 +1,4 @@
-package com.projectbolek.domain.model;
+package com.projectbolek.domain.entity;
 
 import lombok.Data;
 
@@ -9,8 +9,9 @@ import java.io.Serializable;
  * Created by rogalsp1 on 29.05.16.
  */
 @Entity
+@Table(name = "service", schema = "bolekshema")
 @Data
-public class Service implements Serializable{
+public class ServiceEntity extends BaseEntity implements Serializable{
 
     private static final long serialVersionUID = -6340154717370017125L;
 

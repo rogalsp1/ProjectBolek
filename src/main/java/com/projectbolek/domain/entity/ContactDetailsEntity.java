@@ -1,4 +1,4 @@
-package com.projectbolek.domain.model;
+package com.projectbolek.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Table(name = "contact_details", schema = "bolekshema")
 @Data
 @JsonNaming
-public class ContactDetails implements Serializable {
+public class ContactDetailsEntity extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 5140439178383171952L;
 
@@ -36,5 +36,5 @@ public class ContactDetails implements Serializable {
     @JsonIgnore
     @OneToOne
     @JoinColumn(name = "patient_id")
-    private Patient patient;
+    private PatientEntity patient;
 }
