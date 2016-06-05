@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  */
 @Data
 @JsonRootName("patient_history")
-public class PatientHistoryDTO implements Serializable {
+public class PatientHistoryDTO extends BaseDTO implements Serializable {
 
     private static final long serialVersionUID = 3049017085084771165L;
 
