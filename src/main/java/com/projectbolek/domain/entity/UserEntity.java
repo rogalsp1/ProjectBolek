@@ -1,6 +1,5 @@
 package com.projectbolek.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -36,20 +35,18 @@ public class UserEntity extends BaseEntity implements Serializable{
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @JsonIgnore
+    private Boolean admin;
+
+    private Boolean doctor;
+
+    private Boolean receptionist;
+
     private String password;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<VisitEntity> visitList;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "personel")
     private List<PersonelInaccessibilityEntity> inaccessibility;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    private List<UserRoleEntity> roles;
-
 
 }

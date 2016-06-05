@@ -2,10 +2,6 @@ package com.projectbolek.service.converter;
 
 import com.projectbolek.domain.entity.ChargeEntity;
 import com.projectbolek.domain.model.dto.ChargeDTO;
-import com.projectbolek.domain.repository.ChargeRepository;
-import com.projectbolek.domain.repository.ExaminationRepository;
-import com.projectbolek.domain.repository.PatientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,15 +9,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ChargeConverter implements EntityDTOConverter<ChargeEntity,ChargeDTO> {
-
-    @Autowired
-    private ChargeRepository chargeRepository;
-
-    @Autowired
-    private PatientRepository patientRepository;
-
-    @Autowired
-    private ExaminationRepository examinationRepository;
 
     @Override
     public ChargeEntity fromDTO(ChargeDTO chargeDTO) {

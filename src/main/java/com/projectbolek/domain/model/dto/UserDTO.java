@@ -1,11 +1,9 @@
 package com.projectbolek.domain.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.projectbolek.domain.model.enums.UserRoleEnum;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by rogalsp1 on 03.06.16.
@@ -28,5 +26,9 @@ public class UserDTO extends BaseDTO implements Serializable {
 
     private String password;
 
-    private List<UserRoleEnum> roles;
+    private Boolean admin;
+
+    private Boolean doctor;
+
+    private Boolean receptionist;
 }
