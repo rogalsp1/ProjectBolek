@@ -1,6 +1,8 @@
 package com.projectbolek.web;
 
 import com.projectbolek.domain.entity.UserEntity;
+import com.projectbolek.domain.model.dto.PasswordDTO;
+import com.projectbolek.domain.model.dto.SignInDTO;
 import com.projectbolek.domain.model.dto.UserDTO;
 import com.projectbolek.domain.model.exception.LoginException;
 import com.projectbolek.service.UserService;
@@ -55,14 +57,14 @@ public class UserController implements Serializable{
     }
 
     @RequestMapping(path = "/{user_id}/change_password", method = RequestMethod.PUT)
-    public ResponseEntity<?> changePassword(@RequestParam("password") String password, @PathVariable("user_id") Long userId) {
-        userService.changePassword(password, userId);
+    public ResponseEntity<?> changePassword(@RequestBody PasswordDTO passwordDTO, @PathVariable("user_id") Long userId) {
+        userService.changePassword(passwordDTO.getPassword(), userId);
         return new ResponseEntity<Object>(null, HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/signin", method = RequestMethod.GET)
-    public UserDTO signIn(@RequestParam("username") String username, @RequestParam("password") String password) throws LoginException {
-        UserEntity user = userService.signIn(username, password);
+    @RequestMapping(path = "/signin", method = RequestMethod.POST)
+    public UserDTO signIn(@RequestBody SignInDTO signInDTO) throws LoginException {
+        UserEntity user = userService.signIn(signInDTO.getUsername(), signInDTO.getPassword());
         return converter.fromEntity(user);
     }
 

@@ -2,9 +2,7 @@ package com.projectbolek.web;
 
 import com.projectbolek.domain.entity.PatientHistoryEntity;
 import com.projectbolek.domain.model.dto.PatientHistoryDTO;
-import com.projectbolek.domain.model.dto.UserDTO;
 import com.projectbolek.service.PatientHistoryService;
-import com.projectbolek.service.UserService;
 import com.projectbolek.service.converter.PatientHistoryConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +21,8 @@ import java.util.List;
 @Slf4j
 
 public class PatientHistoryController implements Serializable {
+
+    private static final long serialVersionUID = 5760646545317636645L;
     private PatientHistoryService patientHistoryService;
     private PatientHistoryConverter converter;
 

@@ -53,14 +53,13 @@ public class UserService extends BaseService<UserEntity> implements Serializable
 
     public UserEntity signIn(String username, String password) throws LoginException {
         UserEntity user = userRepository.findUserEntityByUsername(username);
-        if(user != null){
+        if(user != null) {
             String hashedPassword = hashPassword(password);
-            hashedPassword.equals(user.getPassword());
-            return user;
-        } else {
-            log.error("Username or password incorrect.");
-            throw new LoginException("Username or password incorrect.");
+            if(hashedPassword.equals(user.getPassword()))
+                return user;
         }
+        log.error("Username or password incorrect. username[" + username +"]");
+        throw new LoginException("Username or password incorrect.");
     }
 
 

@@ -19,6 +19,7 @@ import java.util.List;
 @Slf4j
 public class PatientHistoryService extends BaseService<PatientHistoryEntity> implements Serializable{
 
+    private static final long serialVersionUID = 1821188478010936413L;
     private PatientRepository patientRepository;
     private PatientHistoryRepository patientHistoryRepository;
 

@@ -170,7 +170,7 @@ public class WADLControllerV2 {
     }
     private String getBaseUrl (HttpServletRequest request) {
         String requestUri = request.getRequestURI();
-        return request.getScheme()+"://"+ request.getServerName()+":"+ request.getServerPort();
+        return request.getScheme()+"://"+ request.getServerName()+":"+ request.getServerPort() + "/" + requestUri;
     }
 
     private String cleanDefault(String value) {

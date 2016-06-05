@@ -19,7 +19,6 @@ import java.util.List;
 public class ChargeService extends BaseService<ChargeEntity> implements Serializable{
 
     private static final long serialVersionUID = -3912845706287604053L;
-
     private ChargeRepository chargeRepository;
 
     @Autowired
