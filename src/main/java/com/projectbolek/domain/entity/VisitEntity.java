@@ -23,8 +23,11 @@ public class VisitEntity extends BaseEntity implements Serializable {
 
     private String notes;
 
-    @Column(name = "visit_date")
-    private Timestamp visitDate;
+    @Column(name = "begin_datetime")
+    private Timestamp beginDateTime;
+
+    @Column(name = "end_datetime")
+    private Timestamp endDateTime;
 
     @OneToMany(mappedBy = "visit")
     private List<ExaminationEntity> visitServiceList;

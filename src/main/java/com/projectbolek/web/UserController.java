@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -56,10 +57,12 @@ public class UserController implements Serializable{
         return new ResponseEntity<Object>(null,HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/{user_id}/change_password", method = RequestMethod.PUT)
-    public ResponseEntity<?> changePassword(@RequestBody PasswordDTO passwordDTO, @PathVariable("user_id") Long userId) {
-        userService.changePassword(passwordDTO.getPassword(), userId);
-        return new ResponseEntity<Object>(null, HttpStatus.OK);
+    @RequestMapping(path = "/availableDoctors", method = RequestMethod.GET)
+    public List<UserDTO> getAvailableDoctors(@RequestParam Long beginDateTime, @RequestParam Long endDateTime) {
+        Timestamp begin = new Timestamp(beginDateTime);
+        Timestamp end = new Timestamp(endDateTime);
+        List<UserEntity> userList = userService.findAvailableDoctors(begin, end);
+        return converter.fromEntity(userList);
     }
 
     @RequestMapping(path = "/signin", method = RequestMethod.POST)
@@ -68,4 +71,9 @@ public class UserController implements Serializable{
         return converter.fromEntity(user);
     }
 
+    @RequestMapping(path = "/{userId}/change_password", method = RequestMethod.PUT)
+    public ResponseEntity<?> changePassword(@RequestBody PasswordDTO passwordDTO, @PathVariable Long userId) {
+        userService.changePassword(passwordDTO.getPassword(), userId);
+        return new ResponseEntity<Object>(null, HttpStatus.OK);
+    }
 }

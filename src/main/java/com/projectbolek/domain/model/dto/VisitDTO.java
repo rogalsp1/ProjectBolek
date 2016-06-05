@@ -19,9 +19,15 @@ public class VisitDTO extends BaseDTO implements Serializable{
 
     private String notes;
 
-    private Timestamp visitDate;
-
     private Long personel;
 
     private Long patient;
+
+    private String personelName;
+
+    private String patientName;
+
+    private Timestamp beginDateTime;
+
+    private Timestamp endDateTime;
 }

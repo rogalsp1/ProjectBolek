@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.List;
 
 import static com.projectbolek.util.BolekUtils.hashPassword;
 
@@ -60,6 +62,10 @@ public class UserService extends BaseService<UserEntity> implements Serializable
         }
         log.error("Username or password incorrect. username[" + username +"]");
         throw new LoginException("Username or password incorrect.");
+    }
+
+    public List<UserEntity> findAvailableDoctors(Timestamp begin, Timestamp end) {
+        return userRepository.findAvailableDoctors(begin, end);
     }
 
 
