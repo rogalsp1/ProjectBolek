@@ -30,6 +30,12 @@ public class VisitController implements Serializable {
     private VisitConverter converter;
 
     @RequestMapping(method = RequestMethod.GET)
+    public List<VisitDTO> getVisits() {
+        List<VisitEntity> visitList = visitService.findAll();
+        return converter.fromEntity(visitList);
+    }
+
+    @RequestMapping(path = "/byDate", method = RequestMethod.GET)
     public List<VisitDTO> getVisitsByDate(@RequestParam Long beginDateTime, @RequestParam Long endDateTime) {
         Timestamp begin = new Timestamp(beginDateTime);
         Timestamp end = new Timestamp(endDateTime);
@@ -40,7 +46,7 @@ public class VisitController implements Serializable {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> saveVisit(@RequestBody VisitDTO visitDTO) {
         VisitEntity visit = converter.fromDTO(visitDTO);
-        visitService.save(visit);
+        visitService.addNewVisit(visit);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 

@@ -22,9 +22,9 @@ public class ChargeEntity extends BaseEntity implements Serializable{
     private Long id;
 
     @Column(name = "to_pay")
-    private Long toPay;
+    private Double toPay;
 
-    @Column(name = "invoice_date")
+    @Column(name = "service_date")
     private Timestamp invoiceDate;
 
     @Column(name = "payment_date")
@@ -35,7 +35,7 @@ public class ChargeEntity extends BaseEntity implements Serializable{
     private PatientEntity patient;
 
     @OneToOne
-    @JoinColumn(name = "visit_service_id")
+    @JoinColumn(name = "examination_id")
     private ExaminationEntity examination;
 
 

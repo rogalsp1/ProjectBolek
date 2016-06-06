@@ -25,7 +25,7 @@ public class VisitConverter implements EntityDTOConverter<VisitEntity,VisitDTO> 
     public VisitEntity fromDTO(VisitDTO visitDTO) {
         Long visitId = visitDTO.getId();
         VisitEntity visitEntity = new VisitEntity();
-        if(visitId == null)
+        if(visitId != null)
             visitEntity = visitRepository.findOne(visitId);
         visitEntity.setNotes(visitDTO.getNotes());
         visitEntity.setUser(userRepository.findOne(visitDTO.getPersonel()));

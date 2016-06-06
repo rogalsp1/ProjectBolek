@@ -17,7 +17,7 @@ public class ChargeDTO extends BaseDTO implements Serializable{
 
     private Long id;
 
-    private Long toPay;
+    private Double toPay;
 
     private Timestamp invoiceDate;
 

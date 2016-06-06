@@ -71,7 +71,7 @@ public class UserController implements Serializable{
         return converter.fromEntity(user);
     }
 
-    @RequestMapping(path = "/{userId}/change_password", method = RequestMethod.PUT)
+    @RequestMapping(path = "/{userId}/changePassword", method = RequestMethod.PUT)
     public ResponseEntity<?> changePassword(@RequestBody PasswordDTO passwordDTO, @PathVariable Long userId) {
         userService.changePassword(passwordDTO.getPassword(), userId);
         return new ResponseEntity<Object>(null, HttpStatus.OK);
