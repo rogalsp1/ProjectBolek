@@ -36,10 +36,11 @@ public class PatientController implements Serializable {
     private VisitConverter visitConverter;
 
     @Autowired
-    public PatientController(PatientService patientService, PatientConverter patientConverter, VisitService visitService) {
+    public PatientController(PatientService patientService, PatientConverter patientConverter, VisitService visitService, VisitConverter visitConverter) {
         this.patientService = patientService;
         this.patientConverter = patientConverter;
         this.visitService = visitService;
+        this.visitConverter = visitConverter;
     }
 
     @RequestMapping(path = "/active", method = RequestMethod.GET)
@@ -65,10 +66,10 @@ public class PatientController implements Serializable {
         patientService.save(patient);
         return new ResponseEntity<Object>(null, HttpStatus.OK);
     }
-    @RequestMapping(path = "/{patientId}", method = RequestMethod.POST)
-    public ResponseEntity<?> getPatient(@PathVariable Long patientId) {
-        patientService.findOne(patientId);
-        return new ResponseEntity<Object>(null, HttpStatus.OK);
+    @RequestMapping(path = "/{patientId}", method = RequestMethod.GET)
+    public PatientDTO getPatient(@PathVariable Long patientId) {
+        PatientEntity patient = patientService.findOne(patientId);
+        return patientConverter.fromEntity(patient);
     }
 
     @RequestMapping(path = "/{patientId}/deactivate", method = RequestMethod.POST)
