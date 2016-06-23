@@ -2,6 +2,8 @@ package com.projectbolek.service;
 
 import com.projectbolek.domain.entity.ContactDetailsEntity;
 import com.projectbolek.domain.entity.PatientEntity;
+import com.projectbolek.domain.model.dto.NewPatientDTO;
+import com.projectbolek.domain.model.enums.SexEnum;
 import com.projectbolek.domain.model.exception.ApplicationException;
 import com.projectbolek.domain.repository.ContactDetailsRepository;
 import com.projectbolek.domain.repository.PatientRepository;
@@ -54,11 +56,13 @@ public class PatientService extends BaseService<PatientEntity> implements Serial
     }
 
     @Transactional
-    public void addNewPatient(PatientEntity patient) throws ApplicationException {
+    public void addNewPatient(NewPatientDTO patient) throws ApplicationException {
         if(isPeselUnique(patient.getPesel())){
-            patient.setRegistrationDate(Timestamp.valueOf(LocalDateTime.now()));
-            patient.setActive(true);
-            patientRepository.save(patient);
+            PatientEntity patientEntity = createNewPatientFromDTO(patient);
+            ContactDetailsEntity contactDetails = createContactDetails(patient);
+            patientEntity.setContactDetailsEntity(contactDetails);
+            contactDetails.setPatient(patientEntity);
+            patientRepository.save(patientEntity);
             log.info("new patient["+patient.getFirstName()+" "+patient.getLastName() +"] created");
         }
         else {
@@ -75,5 +79,27 @@ public class PatientService extends BaseService<PatientEntity> implements Serial
     }
     private boolean isPeselUnique(String pesel){
         return !patientRepository.findPatientByPesel(pesel).isPresent();
+    }
+
+    private PatientEntity createNewPatientFromDTO(NewPatientDTO patientDTO) {
+        PatientEntity patient = new PatientEntity();
+        patient.setActive(true);
+        patient.setRegistrationDate(Timestamp.valueOf(LocalDateTime.now()));
+        patient.setBirthdate(patientDTO.getBirthdate());
+        patient.setPesel(patientDTO.getPesel());
+        patient.setFirstName(patientDTO.getFirstName());
+        patient.setLastName(patientDTO.getLastName());
+        patient.setSex(SexEnum.valueOf(patientDTO.getSex()));
+        return patient;
+    }
+
+    private ContactDetailsEntity createContactDetails(NewPatientDTO patientDTO) {
+        ContactDetailsEntity contactDetails = new ContactDetailsEntity();
+        contactDetails.setCity(patientDTO.getCity());
+        contactDetails.setCountry(patientDTO.getCountry());
+        contactDetails.setPhoneNumber(patientDTO.getPhoneNumber());
+        contactDetails.setProvince(patientDTO.getProvince());
+        contactDetails.setStreet(patientDTO.getCity());
+        return contactDetails;
     }
 }

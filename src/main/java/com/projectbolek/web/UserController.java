@@ -65,7 +65,7 @@ public class UserController implements Serializable{
         return converter.fromEntity(userList);
     }
 
-    @RequestMapping(path = "/signin", method = RequestMethod.POST)
+    @RequestMapping(path = "/signIn", method = RequestMethod.POST)
     public UserDTO signIn(@RequestBody SignInDTO signInDTO) throws LoginException {
         UserEntity user = userService.signIn(signInDTO.getUsername(), signInDTO.getPassword());
         return converter.fromEntity(user);

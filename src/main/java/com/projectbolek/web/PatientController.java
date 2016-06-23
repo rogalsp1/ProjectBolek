@@ -3,6 +3,7 @@ package com.projectbolek.web;
 import com.projectbolek.domain.entity.ContactDetailsEntity;
 import com.projectbolek.domain.entity.PatientEntity;
 import com.projectbolek.domain.entity.VisitEntity;
+import com.projectbolek.domain.model.dto.NewPatientDTO;
 import com.projectbolek.domain.model.dto.PatientDTO;
 import com.projectbolek.domain.model.dto.VisitDTO;
 import com.projectbolek.domain.model.exception.ApplicationException;
@@ -50,10 +51,9 @@ public class PatientController implements Serializable {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> addNewPatient(@RequestBody PatientDTO patientDTO) {
-        PatientEntity patient = patientConverter.fromDTO(patientDTO);
+    public ResponseEntity<?> addNewPatient(@RequestBody NewPatientDTO patientDTO) {
         try {
-            patientService.addNewPatient(patient);
+            patientService.addNewPatient(patientDTO);
         } catch (ApplicationException e) {
             return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -78,12 +78,12 @@ public class PatientController implements Serializable {
         return new ResponseEntity<Object>(null, HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/{patientId}/contactdetails", method = RequestMethod.GET)
+    @RequestMapping(path = "/{patientId}/contactDetails", method = RequestMethod.GET)
     public ContactDetailsEntity getContactDetails(@PathVariable Long patientId) {
         return patientService.findContactDetailsByPatientId(patientId);
     }
 
-    @RequestMapping(path = "/{patientId}/contactdetails", method = RequestMethod.POST)
+    @RequestMapping(path = "/{patientId}/contactDetails", method = RequestMethod.POST)
     public ResponseEntity<?> saveContactDetails(@RequestBody ContactDetailsEntity contactDetailsEntity, @PathVariable Long patientId) {
         patientService.saveContactDetails(contactDetailsEntity, patientId);
         return new ResponseEntity<Object>(null, HttpStatus.OK);

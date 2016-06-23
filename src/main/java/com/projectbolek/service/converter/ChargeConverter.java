@@ -21,7 +21,7 @@ public class ChargeConverter implements EntityDTOConverter<ChargeEntity,ChargeDT
         chargeDTO.setId(chargeEntity.getId());
         chargeDTO.setToPay(chargeEntity.getToPay());
         chargeDTO.setInvoiceDate(chargeEntity.getInvoiceDate());
-        chargeDTO.setPaymantDate(chargeEntity.getPaymantDate());
+        chargeDTO.setPaymantDate(chargeEntity.getPaymentDate());
         chargeDTO.setPatient(chargeEntity.getPatient().getId());
         chargeDTO.setExamination(chargeEntity.getExamination().getId());
         return chargeDTO;

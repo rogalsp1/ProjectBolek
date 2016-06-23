@@ -28,7 +28,7 @@ public class ChargeEntity extends BaseEntity implements Serializable{
     private Timestamp invoiceDate;
 
     @Column(name = "payment_date")
-    private Timestamp paymantDate;
+    private Timestamp paymentDate;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
