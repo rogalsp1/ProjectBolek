@@ -63,6 +63,7 @@ public class PatientService extends BaseService<PatientEntity> implements Serial
             patientEntity.setContactDetailsEntity(contactDetails);
             contactDetails.setPatient(patientEntity);
             patientRepository.save(patientEntity);
+            contactDetailsRepository.save(contactDetails);
             log.info("new patient["+patient.getFirstName()+" "+patient.getLastName() +"] created");
         }
         else {

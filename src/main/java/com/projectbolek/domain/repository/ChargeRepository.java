@@ -13,13 +13,13 @@ import java.util.List;
 @Repository
 public interface ChargeRepository extends CrudRepository<ChargeEntity, Long> {
 
-    @Query("select ch from ChargeEntity ch join ch.patient p where p = ?1")
+    @Query("select ch from ChargeEntity ch join ch.patient p where p.id = ?1")
     List<ChargeEntity> findChargesByPatientId(Long patientId);
 
-    @Query("select ch from ChargeEntity ch join ch.patient p where p = ?1 and ch.paymentDate is null")
+    @Query("select ch from ChargeEntity ch join ch.patient p where p.id = ?1 and ch.paymentDate is null")
     List<ChargeEntity> findNotPaidChargesByPatientId(Long patientId);
 
-    @Query("select ch from ChargeEntity ch join ch.patient p where p = ?1 and ch.paymentDate is not null")
+    @Query("select ch from ChargeEntity ch join ch.patient p where p.id = ?1 and ch.paymentDate is not null")
     List<ChargeEntity> findPaidChargesByPatientId(Long patientId);
 
 }

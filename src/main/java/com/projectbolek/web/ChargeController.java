@@ -8,7 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Serializable;
 import java.util.List;
@@ -46,8 +49,9 @@ public class ChargeController implements Serializable{
         List<ChargeEntity> chargeList = chargeService.getPatientCharges(id, paid);
         return chargeConverter.fromEntity(chargeList);
     }
-    @RequestMapping(value = "patients/{id}/charges", method = RequestMethod.PUT)
-    public ResponseEntity<?> setChargePaid(@RequestParam Long chargeId) {
+
+    @RequestMapping(value = "patients/charges/{chargeId}/pay", method = RequestMethod.PUT)
+    public ResponseEntity<?> setChargePaid(@PathVariable Long chargeId) {
         chargeService.setChargePaid(chargeId);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }

@@ -24,7 +24,7 @@ public class ExaminationConverter implements EntityDTOConverter<ExaminationEntit
     public ExaminationEntity fromDTO(ExaminationDTO examinationDTO) {
         ExaminationEntity examinationEntity = new ExaminationEntity();
         ServiceEntity service = serviceRepository.findOne(examinationDTO.getService());
-        VisitEntity visit = visitRepository.findOne(examinationDTO.getId());
+        VisitEntity visit = visitRepository.findOne(examinationDTO.getVisit());
         examinationEntity.setService(service);
         examinationEntity.setServiceDate(examinationDTO.getServiceDate());
         examinationEntity.setVisit(visit);

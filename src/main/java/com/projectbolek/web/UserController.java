@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -57,11 +56,9 @@ public class UserController implements Serializable{
         return new ResponseEntity<Object>(null,HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/availableDoctors", method = RequestMethod.GET)
-    public List<UserDTO> getAvailableDoctors(@RequestParam Long beginDateTime, @RequestParam Long endDateTime) {
-        Timestamp begin = new Timestamp(beginDateTime);
-        Timestamp end = new Timestamp(endDateTime);
-        List<UserEntity> userList = userService.findAvailableDoctors(begin, end);
+    @RequestMapping(path = "/doctors", method = RequestMethod.GET)
+    public List<UserDTO> getDoctors() {
+        List<UserEntity> userList = userService.findDoctors();
         return converter.fromEntity(userList);
     }
 

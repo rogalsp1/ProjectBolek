@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -16,6 +15,6 @@ public interface UserRepository extends CrudRepository<UserEntity, Long>{
 
     UserEntity findUserEntityByUsername(String username);
 
-    @Query("select u from VisitEntity v join v.user u where u.doctor = true and v.beginDateTime not between ?1 and ?2")
-    List<UserEntity> findAvailableDoctors (Timestamp begin, Timestamp end);
+    @Query("select u from VisitEntity v join v.user u where u.doctor = true ")
+    List<UserEntity> findDoctors();
 }

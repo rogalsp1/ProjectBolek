@@ -18,7 +18,6 @@ import java.util.List;
  */
 @RestController
 @Slf4j
-@RequestMapping("/examinations")
 public class ExaminationController implements Serializable {
 
     private static final long serialVersionUID = 1894311676334772145L;
@@ -27,21 +26,16 @@ public class ExaminationController implements Serializable {
     @Autowired
     private ExaminationConverter converter;
 
-    @RequestMapping(value = "/byVisit", method = RequestMethod.GET)
-    public List<ExaminationDTO> getVisitExaminations(@RequestParam Long visitId) {
-        List<ExaminationEntity> examinationList = service.findExaminationsByVisit(visitId);
-        return converter.fromEntity(examinationList);
-    }
-    @RequestMapping(value = "/byPatient", method = RequestMethod.GET)
-    public List<ExaminationDTO> getPatientExaminations(@RequestParam Long patientId) {
-        List<ExaminationEntity> examinationList = service.findExaminationsByPatient(patientId);
+    @RequestMapping(value = "/visits/{id}/examinations", method = RequestMethod.GET)
+    public List<ExaminationDTO> getExaminations(@PathVariable Long id) {
+        List<ExaminationEntity> examinationList = service.findExaminationsByVisit(id);
         return converter.fromEntity(examinationList);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/examinations", method = RequestMethod.POST)
     public ResponseEntity addNewExamination(@RequestBody ExaminationDTO examinationDTO) {
         ExaminationEntity examinationEntity = converter.fromDTO(examinationDTO);
-        service.save(examinationEntity);
+        service.addNewExamination(examinationEntity);
         return new ResponseEntity(null, HttpStatus.OK);
     }
 

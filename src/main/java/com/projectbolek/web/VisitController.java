@@ -57,9 +57,16 @@ public class VisitController implements Serializable {
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
+    @RequestMapping(path = "/{visitId}", method = RequestMethod.GET)
+    public VisitDTO getVisit(@PathVariable Long visitId) {
+        VisitEntity visitEntity = visitService.findOne(visitId);
+        return converter.fromEntity(visitEntity);
+    }
+
     @RequestMapping(path = "/{visitId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteVisit(@PathVariable Long visitId) {
         visitService.delete(visitId);
         return new ResponseEntity<Object>(null,HttpStatus.OK);
     }
+
 }
